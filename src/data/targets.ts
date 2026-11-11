@@ -61,14 +61,35 @@ export const targetGroups: TargetGroup[] = [
     id: 'luogu-archive',
     name: { zh: '洛谷档案馆', en: 'Luogu Archive' },
     description: {
-      zh: '第三方存档站，收录文章、剪贴板、犇犇、陶片放逐与题解。',
-      en: 'Third-party archive for articles, pastes, feeds, banishments and solutions.',
+      zh: '第三方存档站，收录文章、剪贴板、犇犇、陶片放逐与题解。主站为 luogu.ac.cn，preview 为新前端，shadcn 与 fluent 为社区界面方案。',
+      en: 'Third-party archive of articles, pastes, feeds, banishments and solutions. luogu.ac.cn is the main site, preview the rewritten frontend, shadcn and fluent the community UI proposals.',
     },
     targets: [
       {
         id: 'luogu-ac-cn',
         name: 'luogu.ac.cn',
         url: 'https://luogu.ac.cn/',
+        icon: ARCHIVE_ICON,
+      },
+      {
+        id: 'preview-luogu-ac-cn',
+        name: 'preview.luogu.ac.cn',
+        url: 'https://preview.luogu.ac.cn/',
+        note: { zh: '新前端公测', en: 'New frontend beta' },
+        icon: ARCHIVE_ICON,
+      },
+      {
+        id: 'shadcn-luogu-ac-cn',
+        name: 'shadcn.luogu.ac.cn',
+        url: 'https://shadcn.luogu.ac.cn/',
+        note: { zh: '社区方案 · SomeoneHX', en: 'Community · SomeoneHX' },
+        icon: ARCHIVE_ICON,
+      },
+      {
+        id: 'fluent-luogu-ac-cn',
+        name: 'fluent.luogu.ac.cn',
+        url: 'https://fluent.luogu.ac.cn/',
+        note: { zh: '社区方案 · liyifan202201', en: 'Community · liyifan202201' },
         icon: ARCHIVE_ICON,
       },
     ],

@@ -21,21 +21,17 @@ export function TargetGroupSection({
 
   return (
     <section>
-      <div className="flex flex-wrap items-end justify-between gap-3">
-        <div>
-          <h2 className="flex items-center gap-2 text-base font-semibold">
-            {group.name[locale]}
-            <Badge variant="secondary" className="tabular-nums">
-              {group.targets.length}
-            </Badge>
-          </h2>
-          {group.description ? (
-            <p className="mt-1 text-sm text-muted-foreground">{group.description[locale]}</p>
-          ) : null}
-        </div>
+      <div className="flex items-center justify-between gap-3">
+        <h2 className="flex min-w-0 items-center gap-2 text-base font-semibold">
+          {group.name[locale]}
+          <Badge variant="secondary" className="tabular-nums">
+            {group.targets.length}
+          </Badge>
+        </h2>
         <Button
           variant="outline"
           size="sm"
+          className="shrink-0"
           disabled={running}
           onClick={() => void onTest(group.targets)}
         >
@@ -43,6 +39,9 @@ export function TargetGroupSection({
           {running ? t('action.testing') : t('action.recheckGroup')}
         </Button>
       </div>
+      {group.description ? (
+        <p className="mt-1 text-sm text-muted-foreground">{group.description[locale]}</p>
+      ) : null}
 
       <div className="mt-4 grid gap-3 sm:grid-cols-2">
         {group.targets.map((target) => (

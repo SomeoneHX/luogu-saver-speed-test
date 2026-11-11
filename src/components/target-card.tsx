@@ -160,15 +160,20 @@ export function TargetCard({
 
       <CardContent className="flex flex-col gap-3">
         <div className="flex items-end justify-between gap-3">
-          <div className="flex items-baseline gap-1">
+          <div className="flex shrink-0 items-baseline gap-1">
             <span className="text-3xl leading-none font-semibold tracking-tight tabular-nums">
               {latency ?? '—'}
             </span>
             <span className="text-sm text-muted-foreground">ms</span>
           </div>
-          <div className="flex flex-col items-end gap-1">
+          <div className="flex min-w-0 flex-col items-end gap-1">
             {target.note ? (
-              <span className="text-[11px] text-muted-foreground">{target.note[locale]}</span>
+              <span
+                className="max-w-full truncate text-[11px] text-muted-foreground"
+                title={target.note[locale]}
+              >
+                {target.note[locale]}
+              </span>
             ) : null}
             {state.result?.ok && state.result.httpStatus !== undefined ? (
               <span className="text-[11px] text-muted-foreground">
