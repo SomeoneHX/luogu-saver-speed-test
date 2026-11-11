@@ -28,7 +28,7 @@ function App() {
             连通性测速
           </div>
           <h1 className="mt-3 text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
-            洛谷保存站域名测速
+            洛谷第三方站点连通性测速
           </h1>
           <p className="mt-3 max-w-xl text-sm leading-relaxed text-pretty text-muted-foreground">
             请求由你的浏览器直接发往各个域名，每个地址连续测三次取最快的一次。结果只代表你此刻的网络状况。
@@ -86,7 +86,7 @@ function App() {
             每个地址发出的是一条带随机参数的 GET 请求，记录从发起到收到响应头的时间，所以这里测的是网络往返加服务端首字节，不含页面资源加载。
           </p>
           <p className="mt-2">
-            主站没有开放跨域头，浏览器拿不到响应内容，只能确认连接已经建立；api.luogu.me 开放了跨域，卡片上会显示真实 HTTP 状态。
+            保存站的域名没有开放跨域头，浏览器拿不到响应内容，只能确认连接已经建立；api.luogu.me 开放了跨域，卡片上会显示真实 HTTP 状态。
           </p>
           <p className="mt-2">连接复用和 CDN 缓存会让重复测试变快，个别数字波动较大时看整体趋势。</p>
         </footer>

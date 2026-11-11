@@ -27,7 +27,9 @@ export function TargetGroupSection({
               {group.targets.length}
             </Badge>
           </h2>
-          <p className="mt-1 text-sm text-muted-foreground">{group.description}</p>
+          {group.description ? (
+            <p className="mt-1 text-sm text-muted-foreground">{group.description}</p>
+          ) : null}
         </div>
         <Button
           variant="outline"

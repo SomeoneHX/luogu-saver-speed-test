@@ -3,17 +3,18 @@ import type { SpeedTarget } from '@/lib/probe'
 export type TargetGroup = {
   id: string
   name: string
-  description: string
+  description?: string
   targets: SpeedTarget[]
 }
 
 const SAVER_ICON = 'https://lgs-cdn.cn-nb1.rains3.com/luogu-saver/favicon.svg'
+const ARCHIVE_ICON = 'https://luogu.ac.cn/favicon.png'
 
 export const targetGroups: TargetGroup[] = [
   {
-    id: 'main',
-    name: '主站入口',
-    description: '洛谷保存站的多个域名，内容一致，按延迟挑一个用。',
+    id: 'luogu-saver',
+    name: '洛谷保存站',
+    description: '六个域名指向同一套前端，api.luogu.me 是它调用的接口，允许跨域。',
     targets: [
       {
         id: 'www-luogu-me',
@@ -42,40 +43,37 @@ export const targetGroups: TargetGroup[] = [
         icon: SAVER_ICON,
       },
       { id: 'www-luogu-us', name: 'www.luogu.us', url: 'https://www.luogu.us/', icon: SAVER_ICON },
-    ],
-  },
-  {
-    id: 'api',
-    name: '接口服务',
-    description: '保存站前端调用的后端接口，返回 JSON。',
-    targets: [
       {
         id: 'api-luogu-me',
         name: 'api.luogu.me',
         url: 'https://api.luogu.me/',
-        note: '开放跨域',
+        note: '接口',
         mode: 'cors',
         icon: SAVER_ICON,
       },
     ],
   },
   {
-    id: 'community',
-    name: '第三方站点',
-    description: '社区维护的洛谷相关站点，与保存站不是同一套服务。',
+    id: 'luogu-archive',
+    name: '洛谷档案馆',
+    description: '第三方存档站，收录文章、剪贴板、犇犇、陶片放逐与题解。',
     targets: [
       {
         id: 'luogu-ac-cn',
-        name: '洛谷档案馆',
+        name: 'luogu.ac.cn',
         url: 'https://luogu.ac.cn/',
-        note: 'luogu.ac.cn',
-        icon: 'https://luogu.ac.cn/favicon.png',
+        icon: ARCHIVE_ICON,
       },
+    ],
+  },
+  {
+    id: 'gengen',
+    name: 'GenGen 洛谷国际',
+    targets: [
       {
         id: 'gen-luogu-qzz-io',
-        name: 'GenGen 洛谷国际',
+        name: 'gen.luogu.qzz.io',
         url: 'https://gen.luogu.qzz.io/',
-        note: 'gen.luogu.qzz.io',
       },
     ],
   },
