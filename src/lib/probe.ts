@@ -1,4 +1,8 @@
+import type { Localized } from '@/lib/localized'
+
 export type ProbeMode = 'cors' | 'no-cors'
+
+export type ProbeFailure = 'timeout' | 'connect' | 'unknown'
 
 export type SpeedTarget = {
   id: string
@@ -7,7 +11,7 @@ export type SpeedTarget = {
   /** 点击跳转与测速请求的地址 */
   url: string
   /** 卡片上的一句备注 */
-  note?: string
+  note?: Localized
   /** 站点图标，缺省时取同源根目录的 favicon.ico */
   icon?: string
   /**
@@ -29,7 +33,7 @@ export type ProbeResult =
       ok: false
       latencyMs: null
       samples: number[]
-      error: string
+      error: ProbeFailure
     }
 
 export class ProbeCancelled extends Error {
@@ -79,15 +83,10 @@ async function probeOnce(
   }
 }
 
-function describeFailure(error: unknown): string {
-  if (error instanceof DOMException && error.name === 'AbortError') {
-    return `超过 ${ATTEMPT_TIMEOUT_MS / 1000} 秒没有响应`
-  }
-  if (error instanceof TypeError) {
-    return '连接失败，域名解析、证书或网络可能有问题'
-  }
-  if (error instanceof Error && error.message) return error.message
-  return '未知错误'
+function classifyFailure(error: unknown): ProbeFailure {
+  if (error instanceof DOMException && error.name === 'AbortError') return 'timeout'
+  if (error instanceof TypeError) return 'connect'
+  return 'unknown'
 }
 
 /** 串行测三次，取最快的一次作为延迟 */
@@ -140,7 +139,7 @@ export async function probeTarget(
     }
   }
 
-  return { ok: false, latencyMs: null, samples, error: describeFailure(failure) }
+  return { ok: false, latencyMs: null, samples, error: classifyFailure(failure) }
 }
 
 export type LatencyTier = 'fast' | 'fair' | 'slow' | 'poor'

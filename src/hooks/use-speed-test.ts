@@ -12,6 +12,7 @@ export type TargetState = {
 }
 
 const IDLE: TargetState = { phase: 'idle' }
+const FAILED: ProbeResult = { ok: false, latencyMs: null, samples: [], error: 'unknown' }
 
 export function useSpeedTest(targets: SpeedTarget[]) {
   const [states, setStates] = useState<Record<string, TargetState>>({})
@@ -44,10 +45,7 @@ export function useSpeedTest(targets: SpeedTarget[]) {
           } else {
             setStates((prev) => ({
               ...prev,
-              [target.id]: {
-                phase: 'done',
-                result: { ok: false, latencyMs: null, samples: [], error: '测速失败' },
-              },
+              [target.id]: { phase: 'done', result: FAILED },
             }))
           }
         } finally {

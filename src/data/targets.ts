@@ -1,9 +1,10 @@
+import type { Localized } from '@/lib/localized'
 import type { SpeedTarget } from '@/lib/probe'
 
 export type TargetGroup = {
   id: string
-  name: string
-  description?: string
+  name: Localized
+  description?: Localized
   targets: SpeedTarget[]
 }
 
@@ -13,14 +14,17 @@ const ARCHIVE_ICON = 'https://luogu.ac.cn/favicon.png'
 export const targetGroups: TargetGroup[] = [
   {
     id: 'luogu-saver',
-    name: '洛谷保存站',
-    description: '六个域名指向同一套前端，api.luogu.me 是它调用的接口，允许跨域。',
+    name: { zh: '洛谷保存站', en: 'Luogu Saver' },
+    description: {
+      zh: '六个域名指向同一套前端，api.luogu.me 是它调用的接口，允许跨域。',
+      en: 'Six domains serve the same frontend; api.luogu.me is the JSON API behind it, with CORS enabled.',
+    },
     targets: [
       {
         id: 'www-luogu-me',
         name: 'www.luogu.me',
         url: 'https://www.luogu.me/',
-        note: '主域名',
+        note: { zh: '主域名', en: 'Primary' },
         icon: SAVER_ICON,
       },
       { id: 'www-luogu-men', name: 'www.luogu.men', url: 'https://www.luogu.men/', icon: SAVER_ICON },
@@ -47,7 +51,7 @@ export const targetGroups: TargetGroup[] = [
         id: 'api-luogu-me',
         name: 'api.luogu.me',
         url: 'https://api.luogu.me/',
-        note: '接口',
+        note: { zh: '接口', en: 'API' },
         mode: 'cors',
         icon: SAVER_ICON,
       },
@@ -55,8 +59,11 @@ export const targetGroups: TargetGroup[] = [
   },
   {
     id: 'luogu-archive',
-    name: '洛谷档案馆',
-    description: '第三方存档站，收录文章、剪贴板、犇犇、陶片放逐与题解。',
+    name: { zh: '洛谷档案馆', en: 'Luogu Archive' },
+    description: {
+      zh: '第三方存档站，收录文章、剪贴板、犇犇、陶片放逐与题解。',
+      en: 'Third-party archive for articles, pastes, feeds, banishments and solutions.',
+    },
     targets: [
       {
         id: 'luogu-ac-cn',
@@ -68,7 +75,7 @@ export const targetGroups: TargetGroup[] = [
   },
   {
     id: 'gengen',
-    name: 'GenGen 洛谷国际',
+    name: { zh: 'GenGen 洛谷国际', en: 'GenGen Luogu International' },
     targets: [
       {
         id: 'gen-luogu-qzz-io',

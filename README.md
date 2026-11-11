@@ -18,14 +18,14 @@ npm run preview
 
 ## 站点清单
 
-站点配置在 `src/data/targets.ts`，一个站点一个分组，组内是该站点的域名。界面按分组渲染卡片，追加条目就会多一张卡片：
+站点配置在 `src/data/targets.ts`，一个站点一个分组，组内是该站点的域名。界面按分组渲染卡片，追加条目就会多一张卡片。分组的 `name`、`description` 与条目的 `note` 都是 `{ zh, en }` 双语对象：
 
 ```ts
 {
   id: 'www-luogu-example',        // 唯一标识，测速状态按它索引
-  name: 'www.luogu.example',      // 卡片标题
+  name: 'www.luogu.example',      // 卡片标题，域名本身不翻译
   url: 'https://www.luogu.example/',
-  note: '主域名',                 // 可选，显示在延迟右侧
+  note: { zh: '主域名', en: 'Primary' },   // 可选，显示在延迟右侧
   mode: 'cors',                   // 可选，默认 no-cors
   icon: 'https://example.com/favicon.svg', // 可选，缺省取同源 /favicon.ico
 }
@@ -37,6 +37,10 @@ npm run preview
 
 - `cors`：对方返回 `Access-Control-Allow-Origin`，能读到真实 HTTP 状态码，卡片上会显示；
 - `no-cors`：只能确认连接是否建立，响应内容不可读，适合没有开放跨域的主站。
+
+## 界面
+
+右上角两个菜单：语言（简体中文 / English）与主题（跟随系统 / 浅色 / 深色）。选择存在 localStorage，主题会在首屏渲染前由 `index.html` 的内联脚本应用，避免闪一下浅色。
 
 ## 测速方式
 
@@ -50,10 +54,15 @@ npm run preview
 src/
 ├── data/targets.ts          # 站点分组与清单
 ├── lib/probe.ts             # 请求探测与延迟分档
+├── lib/localized.ts         # 双语文本类型
+├── i18n/                    # 中英字典与语言上下文
+├── theme/                   # 主题模式（跟随系统 / 浅色 / 深色）
 ├── hooks/use-speed-test.ts  # 测速状态、并发调度、汇总统计
 ├── components/
 │   ├── target-card.tsx      # 单个站点卡片
 │   ├── target-group-section.tsx
+│   ├── locale-menu.tsx
+│   ├── theme-menu.tsx
 │   └── stat.tsx
 └── components/ui/           # shadcn/ui 组件
 ```
