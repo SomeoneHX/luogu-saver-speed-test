@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { RefreshCw, Square, Waypoints } from 'lucide-react'
+import { GithubLink } from '@/components/github-link'
 import { LocaleMenu } from '@/components/locale-menu'
 import { Stat } from '@/components/stat'
 import { TargetGroupSection } from '@/components/target-group-section'
@@ -38,6 +39,7 @@ function App() {
               </h1>
             </div>
             <div className="flex shrink-0 items-center gap-1">
+              <GithubLink />
               <LocaleMenu />
               <ThemeMenu />
             </div>
