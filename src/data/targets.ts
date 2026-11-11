@@ -59,6 +59,26 @@ export const targetGroups: TargetGroup[] = [
       },
     ],
   },
+  {
+    id: 'community',
+    name: '第三方站点',
+    description: '社区维护的洛谷相关站点，与保存站不是同一套服务。',
+    targets: [
+      {
+        id: 'luogu-ac-cn',
+        name: '洛谷档案馆',
+        url: 'https://luogu.ac.cn/',
+        note: 'luogu.ac.cn',
+        icon: 'https://luogu.ac.cn/favicon.png',
+      },
+      {
+        id: 'gen-luogu-qzz-io',
+        name: 'GenGen 洛谷国际',
+        url: 'https://gen.luogu.qzz.io/',
+        note: 'gen.luogu.qzz.io',
+      },
+    ],
+  },
 ]
 
 export const allTargets = targetGroups.flatMap((group) => group.targets)
