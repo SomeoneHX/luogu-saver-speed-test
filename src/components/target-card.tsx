@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { ArrowUpRight, RefreshCw } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { Button, buttonVariants } from '@/components/ui/button'
@@ -65,6 +66,31 @@ function resolveStatus(state: TargetState): StatusMeta {
   return STATUS[latencyTier(state.result.latencyMs)]
 }
 
+function TargetIcon({ target }: { target: SpeedTarget }) {
+  const [failed, setFailed] = useState(false)
+  const src = target.icon ?? `${new URL(target.url).origin}/favicon.ico`
+  const initial = target.name.replace(/^www\./, '').charAt(0).toUpperCase()
+
+  if (failed) {
+    return (
+      <div className="flex size-9 shrink-0 items-center justify-center rounded-lg border border-border/70 bg-muted text-xs font-semibold text-muted-foreground">
+        {initial}
+      </div>
+    )
+  }
+
+  return (
+    <img
+      src={src}
+      alt=""
+      width={36}
+      height={36}
+      className="size-9 shrink-0 rounded-lg border border-border/70 bg-background object-contain p-1"
+      onError={() => setFailed(true)}
+    />
+  )
+}
+
 function describeSamples(state: TargetState): string {
   if (state.phase === 'running') return '正在请求…'
   if (!state.result) return '尚未测速'
@@ -93,17 +119,20 @@ export function TargetCard({
     <Card className="h-full justify-between gap-3 shadow-none">
       <CardHeader>
         <div className="flex items-start justify-between gap-3">
-          <div className="min-w-0">
-            <div className="truncate font-mono text-sm font-medium">{target.name}</div>
-            <a
-              href={target.url}
-              target="_blank"
-              rel="noreferrer noopener"
-              className="mt-1 inline-flex max-w-full items-center gap-1 text-xs text-muted-foreground underline-offset-2 hover:text-foreground hover:underline"
-            >
-              <span className="truncate">{target.url}</span>
-              <ArrowUpRight className="size-3 shrink-0" />
-            </a>
+          <div className="flex min-w-0 items-center gap-2.5">
+            <TargetIcon target={target} />
+            <div className="min-w-0">
+              <div className="truncate font-mono text-sm font-medium">{target.name}</div>
+              <a
+                href={target.url}
+                target="_blank"
+                rel="noreferrer noopener"
+                className="mt-0.5 inline-flex max-w-full items-center gap-1 text-xs text-muted-foreground underline-offset-2 hover:text-foreground hover:underline"
+              >
+                <span className="truncate">{target.url}</span>
+                <ArrowUpRight className="size-3 shrink-0" />
+              </a>
+            </div>
           </div>
           <Badge variant="outline" className={cn('gap-1.5', status.badgeClass)}>
             <span className={cn('size-1.5 rounded-full', status.dotClass)} />

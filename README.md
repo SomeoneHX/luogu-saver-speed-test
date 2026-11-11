@@ -27,8 +27,11 @@ npm run preview
   url: 'https://www.luogu.example/',
   note: '主域名',                 // 可选，显示在延迟右侧
   mode: 'cors',                   // 可选，默认 no-cors
+  icon: 'https://example.com/favicon.svg', // 可选，缺省取同源 /favicon.ico
 }
 ```
+
+`icon` 加载失败时卡片会退回显示域名首字母。主站的 `/favicon.ico` 被前端路由兜底成 HTML，所以清单里显式指向了 CDN 上的图标。
 
 `mode` 决定测速能拿到什么：
 

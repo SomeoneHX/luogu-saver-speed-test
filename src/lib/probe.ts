@@ -8,6 +8,8 @@ export type SpeedTarget = {
   url: string
   /** 卡片上的一句备注 */
   note?: string
+  /** 站点图标，缺省时取同源根目录的 favicon.ico */
+  icon?: string
   /**
    * cors：能读到真实 HTTP 状态码，需要对方返回跨域头
    * no-cors：只能确认网络层可达，响应内容不透明
