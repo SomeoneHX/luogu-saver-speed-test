@@ -94,17 +94,6 @@ export const targetGroups: TargetGroup[] = [
       },
     ],
   },
-  {
-    id: 'gengen',
-    name: { zh: 'GenGen 洛谷国际', en: 'GenGen Luogu International' },
-    targets: [
-      {
-        id: 'gen-luogu-qzz-io',
-        name: 'gen.luogu.qzz.io',
-        url: 'https://gen.luogu.qzz.io/',
-      },
-    ],
-  },
 ]
 
 export const allTargets = targetGroups.flatMap((group) => group.targets)
